@@ -7,7 +7,7 @@ import input.MouseHandler;
 
 import java.nio.ByteBuffer;
  
-
+import org.lwjgl.LWJGLUtil;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -100,7 +100,7 @@ public class Main {
         GL.createCapabilities();
  
         // Set the clear color
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0f, 1.0f, 1.0f, 0.0f);
  
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
@@ -122,4 +122,20 @@ public class Main {
         new Main().run();
     }
  
+    // Gives us our orthographic matrix
+ 	public static Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far){
+ 		Matrix4f matrix = new Matrix4f();
+ 		
+ 		matrix.elements[0 + 0 * 4] = 2.0f / (right - left);
+ 		matrix.elements[1 + 1 * 4] = 2.0f / (top - bottom);
+ 		matrix.elements[2 + 2 * 4] = 2.0f / (near - far);
+
+ 		matrix.elements[0 + 3 * 4] = (left + right) / (left - right);
+ 		matrix.elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
+ 		matrix.elements[2 + 3 * 4] = (far + near) / (far - near);
+ 		
+ 		matrix.elements[3 + 3 * 4] = 1.0f;
+ 		
+ 		return matrix;
+ 	}
 }
