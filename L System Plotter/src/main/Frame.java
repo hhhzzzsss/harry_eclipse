@@ -1,5 +1,5 @@
 package main;
-// Oh I don't like that , so I just changed back
+
 import javax.swing.JFrame;
 
 public class Frame extends JFrame{
